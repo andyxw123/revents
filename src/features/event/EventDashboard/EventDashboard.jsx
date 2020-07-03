@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Button } from 'semantic-ui-react';
 import EventList from '../EventList/EventList';
 import EventForm from '../EventForm/EventForm';
+import cuid from 'cuid';
 
 const dashboardEvents = [
   {
@@ -76,6 +77,15 @@ class EventDashboard extends Component {
     }));
   };
 
+  eventCreated = (newEvent) => {
+    newEvent.id = cuid();
+    newEvent.hostPhotoURL = '/assets/user.png';
+    this.setState(({events}) => ({
+      events: [...events, newEvent],
+      isOpen: false
+    }))
+  }
+
   render() {
     const { events, isOpen } = this.state;
 
@@ -93,7 +103,7 @@ class EventDashboard extends Component {
             )}
             {/* Also pass handleIsOpenToggle to the event form to close it */}
             {/* This is inverse data flow as the child is changing state in the parent */}
-            {isOpen && <EventForm cancelFormOpen={this.handleIsOpenToggle} />}
+            {isOpen && <EventForm createEvent={this.eventCreated} cancelFormOpen={this.handleIsOpenToggle} />}
           </Grid.Column>
         </Grid>
       </div>
