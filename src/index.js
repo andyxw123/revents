@@ -19,9 +19,9 @@ const rootEL = document.getElementById('root');
 
 let render = () => {
   ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
+    // <React.StrictMode>
+      <App />,
+    // </React.StrictMode>,
     rootEL
   );
 }
