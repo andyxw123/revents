@@ -26,10 +26,10 @@ class NavBar extends Component {
           </Menu.Item>
           <Menu.Item name='Events' as={NavLink} exact to='/events' />
           <Menu.Item name='People' as={NavLink} exact to='/people' />
+          <Menu.Item name='Test' as={NavLink} exact to='/test' />
           <Menu.Item>
             <Button
               as={Link}
-              exact
               to='/createEvent'
               floated='right'
               positive
