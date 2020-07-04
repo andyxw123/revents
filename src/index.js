@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './app/layout/App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
 
 
 //// SET UP HOT MODULE RELOADING
@@ -20,7 +21,9 @@ const rootEL = document.getElementById('root');
 let render = () => {
   ReactDOM.render(
     // <React.StrictMode>
-      <App />,
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
     // </React.StrictMode>,
     rootEL
   );
