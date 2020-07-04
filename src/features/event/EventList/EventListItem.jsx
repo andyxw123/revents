@@ -4,24 +4,17 @@ import EventListAttendee from './EventListAttendee';
 
 class EventListItem extends Component {
   render() {
-
-    const {event} = this.props;
+    const { event, onSelectEvent, onEventDeleted } = this.props;
 
     return (
       <Segment.Group>
         <Segment>
           <Item.Group>
             <Item>
-              <Item.Image
-                size='tiny'
-                circular
-                src={event.hostPhotoURL} 
-              />
+              <Item.Image size='tiny' circular src={event.hostPhotoURL} />
               <Item.Content>
                 <Item.Header>{event.title}</Item.Header>
-                <Item.Description>
-                  Hosted by {event.hostedBy}
-                </Item.Description>
+                <Item.Description>Hosted by {event.hostedBy}</Item.Description>
               </Item.Content>
             </Item>
           </Item.Group>
@@ -34,14 +27,35 @@ class EventListItem extends Component {
         </Segment>
         <Segment secondary>
           <List horizontal>
-            {event.attendees && event.attendees.map(attendee => (
+            {event.attendees &&
+              event.attendees.map((attendee) => (
                 <EventListAttendee key={attendee.id} attendee={attendee} />
-            )) }
+              ))}
           </List>
         </Segment>
         <Segment clearing>
           <span>{event.description}</span>
-          <Button as='a' color='teal' floated='right' content='View' />
+          {/* To pass the event to the selectEvent handler, need to  
+              enclose with an arrow function so it is only executed on click.
+              Can also include the "e" args from the click itself
+          */}
+
+          <div>
+            <Button
+              onClick={(e) => onEventDeleted(event.id)}
+              as='a'
+              color='red'
+              floated='right'
+              content='Delete'
+            />
+            <Button
+              onClick={(e) => onSelectEvent(e, event)}
+              as='a'
+              color='teal'
+              floated='right'
+              content='View'
+            />
+          </div>
         </Segment>
       </Segment.Group>
     );
